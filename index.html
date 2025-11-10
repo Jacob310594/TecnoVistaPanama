@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoVista | Venta de Computadoras y Soluciones Digitales</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0070f3', // Azul brillante
+                        'secondary': '#1f2937', // Gris oscuro
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Usamos nuestra nueva fuente
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Enlace a la hoja de estilos externa -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-[#0d1117] text-white">
+
+<!-- BARRA DE NAVEGACIÓN -->
+<header class="sticky top-0 z-50 bg-secondary/95 backdrop-blur-sm shadow-xl border-b border-gray-700">
+    <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold text-primary hover:text-white transition duration-200">TecnoVista</a>
+        
+        <div id="nav-links" class="hidden md:flex space-x-6 font-medium">
+            <a href="index.html" class="hover:text-primary transition duration-200">Inicio</a>
+            <a href="sobre.html" class="hover:text-primary transition duration-200">Sobre Nosotros</a>
+            <a href="productos.html" class="hover:text-primary transition duration-200">Productos</a>
+            <a href="galerias.html" class="hover:text-primary transition duration-200">Galerías</a>
+            <a href="contacto.html" class="hover:text-primary transition duration-200">Contacto</a>
+        </div>
+
+        <!-- Icono de Carrito -->
+        <div class="relative">
+            <a href="carrito.html" id="cart-button-link" class="p-2 rounded-lg text-white hover:bg-gray-700 transition duration-200 block">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+            </a>
+        </div>
+
+        <!-- Menú Móvil -->
+        <button id="menu-button" class="md:hidden p-2 rounded-lg text-white hover:bg-gray-700 transition duration-200">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </nav>
+    
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden md:hidden bg-secondary border-t border-gray-700">
+        <a href="index.html" class="block py-3 px-4 text-center hover:bg-gray-700" onclick="closeMenu()">Inicio</a>
+        <a href="sobre.html" class="block py-3 px-4 text-center hover:bg-gray-700" onclick="closeMenu()">Sobre Nosotros</a>
+        <a href="productos.html" class="block py-3 px-4 text-center hover:bg-gray-700" onclick="closeMenu()">Productos</a>
+        <a href="galerias.html" class="block py-3 px-4 text-center hover:bg-gray-700" onclick="closeMenu()">Galerías</a>
+        <a href="contacto.html" class="block py-3 px-4 text-center hover:bg-gray-700" onclick="closeMenu()">Contacto</a>
+    </div>
+</header>
+
+<main>
+    <!-- SECCIÓN DE INICIO -->
+    <section id="inicio" class="h-screen flex items-center justify-center text-center">
+        <div class="max-w-4xl p-8 bg-black/50 rounded-xl shadow-2xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight text-white">
+                El Futuro de la <span class="text-primary">Computación</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">
+                Explora las mejores marcas y soluciones tecnológicas a tu alcance.
+            </p>
+            <a href="productos.html" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:bg-blue-600 transition duration-300 transform hover:scale-105">
+                Ver Catálogo Ahora
+            </a>
+        </div>
+    </section>
+</main>
+
+<!-- MODAL DEL CARRITO -->
+<div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
+    <div class="bg-gray-800 text-white w-full max-w-2xl max-h-[80vh] rounded-xl shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-gray-700 flex justify-between items-center">
+            <h3 class="text-2xl font-bold text-primary">Carrito de Compras</h3>
+            <button id="close-cart-button" class="text-gray-400 hover:text-white">&times;</button>
+        </div>
+        <div id="cart-items-container" class="p-6 overflow-y-auto flex-grow">
+            <!-- Los artículos del carrito se insertarán aquí -->
+        </div>
+        <div class="p-6 border-t border-gray-700 bg-gray-900 rounded-b-xl">
+            <div class="flex justify-between items-center text-xl font-bold mb-4">
+                <span>Total:</span>
+                <span id="cart-total">$0.00 USD</span>
+            </div>
+            <a href="carrito.html" class="block w-full text-center bg-primary text-white font-bold py-3 rounded-lg hover:bg-blue-600 transition-colors">Ver Carrito Detallado</a>
+            <div class="mt-4 flex items-center justify-center gap-4">
+                <span class="text-xs text-gray-400">Pagos seguros con:</span>
+                <div class="flex gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="24" viewBox="0 0 38 24" role="img" aria-labelledby="pi-visa" class="w-10 h-auto"><title id="pi-visa">Visa</title><path fill="#142688" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M28.8 10.1c-.1-.3-.3-.5-.5-.7-.2-.2-.5-.3-.8-.5-.3-.2-.6-.3-1-.4-.4-.1-.7-.2-1.1-.2-.9 0-1.7.1-2.5.4-.8.3-1.5.7-2.1 1.2-.6.5-1.1 1.1-1.5 1.8-.4.7-.6 1.5-.6 2.4 0 1.1.3 2.1.8 3 .5.9 1.2 1.6 2.1 2.1.9.5 2 .8 3.1.8.9 0 1.8-.2 2.5-.5.7-.3 1.4-.8 2-1.3.5-.5.9-1.1 1.2-1.8.3-.7.5-1.5.5-2.3 0-.6-.1-1.1-.3-1.6-.2-.5-.4-.9-.7-1.3zM15 10.2h-2.8v7.6h2.8v-7.6zM11.3 10h-3c-.3 0-.5.2-.6.5L4 17.8h3.2l.6-2.1h3.3l.4 2.1h3.1L11.9 10c-.1-.2-.3-.2-.6-.2zm-1.6 4.3h2.3l-.9-3.1-.9 3.1z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="24" viewBox="0 0 38 24" role="img" aria-labelledby="pi-mastercard" class="w-10 h-auto"><title id="pi-mastercard">Mastercard</title><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-3.9-3.1-7-7-7s-7 3.1-7 7 3.1 7 7 7 7-3.1 7-7z"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-secondary py-8 border-t border-gray-700">
+    <div class="container mx-auto px-4 text-center text-gray-500">
+        <p>&copy; 2025 TecnoVista. Todos los derechos reservados.</p>
+        <p class="text-sm mt-2">Venta de equipos de cómputo multimarca.</p>
+    </div>
+</footer>
+
+<!-- Enlace al archivo JavaScript externo -->
+<script src="assets/js/script.js"></script>
+
+</body>
+</html>
